@@ -12,7 +12,7 @@ AI based extension for avoiding doomscrolling.
 - Member 2 : Niranjana Rajesh - Muthoot Institude of Technology and Science
 
 ##Hosted Project Link
-Video link here 👉🏼 : 
+Video link here 👉🏼 : https://drive.google.com/file/d/12vi5icgUX9JNQmQMbjX236xUQJ2-e8TQ/view?usp=drive_link
 
 ##Project Description
 Visco is a lightweight Chrome extension that introduces progressive friction to high-distraction websites. Instead of hard blocking content, it gradually increases visual blur and scroll delay after extended usage. The goal is to build awareness, encourage intentional browsing, and reduce unconscious doomscrolling.
