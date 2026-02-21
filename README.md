@@ -3,25 +3,25 @@
 # 🌊 Visco: The Speed Bump for Your Brain
 AI based extension for avoiding doomscrolling.
 
-##Basic Details
+## Basic Details
 
 ### Team Name: SheCodes
 
-##Team Members
+## Team Members
 - Member 1 : Aarya Prasad - Muthoot Institude of Technology and Science
 - Member 2 : Niranjana Rajesh - Muthoot Institude of Technology and Science
 
-##Hosted Project Link
+## Hosted Project Link
 Video link here 👉🏼 :<https://drive.google.com/file/d/12vi5icgUX9JNQmQMbjX236xUQJ2-e8TQ/view?usp=drive_link>
 
-##Project Description
+## Project Description
 Visco is a lightweight Chrome extension that introduces progressive friction to high-distraction websites. Instead of hard blocking content, it gradually increases visual blur and scroll delay after extended usage. The goal is to build awareness, encourage intentional browsing, and reduce unconscious doomscrolling.
 
-##Problem Statement
+## Problem Statement
 Hard blockers often trigger frustration and rebound behavior. Users either disable them or binge later. There is currently no subtle, psychologically aware system that gently increases effort instead of restricting access.
 Digital overconsumption happens not because of lack of discipline — but because of frictionless design.
 
-##The Solution
+## The Solution
 Visco introduces progressive friction:
 - After 15 minutes of active usage on distracting domains, the page gradually becomes harder to consume.
 - Visual blur and grayscale effects increase over time.
@@ -29,20 +29,20 @@ Visco introduces progressive friction:
 - Restrictions automatically lift after a short break.
 Instead of locking the door, Visco makes you choose whether it's worth staying.
 
-##Technical Details
+## Technical Details
 
-###Technologies / Components Used
+### Technologies / Components Used
 
-####For Software:
+#### For Software:
 - Languages Used: JavaScript (ES6), CSS
 - Frameworks Used: None (Vanilla implementation)
 - Libraries Used: None (Lightweight by design)
 - Tools Used: VS Code, Git, Chrome Developer Tools
 
-####For Hardware:
+#### For Hardware:
 Not applicable – software-only project.
 
-##Features
+## Features
 1️⃣ Progressive Viscosity
 - After 15 minutes of active use:
 - CSS filters apply: blur() and grayscale()
@@ -60,9 +60,9 @@ If the user leaves the tab for 5 minutes:
 - No heavy frameworks
 Privacy-first, minimal footprint.
 
-##Implementation
-###For Software
-###Installation (Development Mode)
+## Implementation
+### For Software
+### Installation (Development Mode)
 1.Clone this repository:
 git clone https://github.com/Niranjana-11/VISCO.git
 
@@ -74,11 +74,11 @@ chrome://extensions/
 5.Select the Visco project folder.
 6.Start browsing
 
-###Run
+### Run
 No server required.
 Once loaded, Visco runs automatically in the background as a Chrome Extension (Manifest v3 service worker).
 
-##Project Documentation
+## Project Documentation
 Screenshots 
 <img width="1920" height="1080" alt="Parental control timer" src="https://github.com/user-attachments/assets/6a96f99b-687d-4a25-b852-8043bf93ba26" />
 Caption:Parental Control with password
@@ -87,18 +87,18 @@ Caption:Parental Control with password
 
 Caption: Image blurring after a given timer.
 
-##Project Demo
+## Project Demo
 Video:
 <https://drive.google.com/file/d/12vi5icgUX9JNQmQMbjX236xUQJ2-e8TQ/view?usp=drive_link>
 
-##AI Tools Used (Transparency)
-###Tools Used
+## AI Tools Used (Transparency)
+### Tools Used
 - ChatGPT – Code review assistance, README refinement, debugging suggestions
 - Google Gemini – Logic brainstorming and idea exploration
 - Perplexity AI – Quick research and validation of implementation approaches
 - Claude – Alternative logic structuring and architectural thinking
 
-###Purpose of AI Usage
+### Purpose of AI Usage
 AI tools were used strictly for:
 - Brainstorming feature logic
 - Reviewing JavaScript structure
@@ -107,7 +107,7 @@ AI tools were used strictly for:
 
 No auto-generated full project code was directly deployed without manual understanding and modification.
 
-###Human Contributions
+### Human Contributions
 Core concept design and behavioral philosophy
 - Extension architecture planning
 - DOM manipulation and scroll throttling logic
@@ -116,7 +116,7 @@ Core concept design and behavioral philosophy
 - UX decisions and feature tuning
 - Integration and testing
 
-##License
+## License
 This project is licensed under the MIT License.
 MIT License allows:
 - Commercial use
