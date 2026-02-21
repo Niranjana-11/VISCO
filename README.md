@@ -67,7 +67,7 @@ Privacy-first, minimal footprint.
 git clone https://github.com/Niranjana-11/VISCO.git
 
 2.Open Chrome or Edge:
-chrome://extensions/
+ <chrome://extensions/>
 
 3.Enable Developer Mode (top right).
 4.Click Load Unpacked.
