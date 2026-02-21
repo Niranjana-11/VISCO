@@ -1,7 +1,7 @@
 <img width="1280" height="640" alt="img" src="https://github.com/user-attachments/assets/4d02c5a7-60eb-4705-b812-86cc9d6a73e5" />
 
 # 🌊 Visco: The Speed Bump for Your Brain
-AI based extension for avoiding doomscrolling.
+Extension for Doomscrolling
 
 ## Basic Details
 
