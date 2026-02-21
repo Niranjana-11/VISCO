@@ -12,7 +12,7 @@ AI based extension for avoiding doomscrolling.
 - Member 2 : Niranjana Rajesh - Muthoot Institude of Technology and Science
 
 ##Hosted Project Link
-Video link here 👉🏼 : https://drive.google.com/file/d/12vi5icgUX9JNQmQMbjX236xUQJ2-e8TQ/view?usp=drive_link
+Video link here 👉🏼 :<https://drive.google.com/file/d/12vi5icgUX9JNQmQMbjX236xUQJ2-e8TQ/view?usp=drive_link>
 
 ##Project Description
 Visco is a lightweight Chrome extension that introduces progressive friction to high-distraction websites. Instead of hard blocking content, it gradually increases visual blur and scroll delay after extended usage. The goal is to build awareness, encourage intentional browsing, and reduce unconscious doomscrolling.
@@ -41,6 +41,88 @@ Instead of locking the door, Visco makes you choose whether it's worth staying.
 
 ####For Hardware:
 Not applicable – software-only project.
+
+##Features
+1️⃣ Progressive Viscosity
+- After 15 minutes of active use:
+- CSS filters apply: blur() and grayscale()
+- Scroll delay increases gradually (0ms → 1000ms)
+
+2️⃣ The Cool Down
+If the user leaves the tab for 5 minutes:
+- Effects automatically reset
+- Friction returns to zero
+
+3️⃣ Lightweight by Design
+- No tracking
+- No analytics
+- No backend
+- No heavy frameworks
+Privacy-first, minimal footprint.
+
+##Implementation
+###For Software
+###Installation (Development Mode)
+1.Clone this repository:
+git clone https://github.com/Niranjana-11/VISCO.git
+
+2.Open Chrome or Edge:
+chrome://extensions/
+
+3.Enable Developer Mode (top right).
+4.Click Load Unpacked.
+5.Select the Visco project folder.
+6.Start browsing
+
+###Run
+No server required.
+Once loaded, Visco runs automatically in the background as a Chrome Extension (Manifest v3 service worker).
+
+##Project Documentation
+Screenshots 
+<img width="1920" height="1080" alt="Parental control timer" src="https://github.com/user-attachments/assets/6a96f99b-687d-4a25-b852-8043bf93ba26" />
+Caption:Parental Control with password
+
+<img width="1920" height="1080" alt="Screen Blur" src="https://github.com/user-attachments/assets/82deebb9-fdfb-45df-80ef-8d2453bb7bef" />
+
+Caption: Image blurring after a given timer.
+
+##Project Demo
+Video:
+<https://drive.google.com/file/d/12vi5icgUX9JNQmQMbjX236xUQJ2-e8TQ/view?usp=drive_link>
+
+##AI Tools Used (Transparency)
+###Tools Used
+- ChatGPT – Code review assistance, README refinement, debugging suggestions
+- Google Gemini – Logic brainstorming and idea exploration
+- Perplexity AI – Quick research and validation of implementation approaches
+- Claude – Alternative logic structuring and architectural thinking
+
+###Purpose of AI Usage
+AI tools were used strictly for:
+- Brainstorming feature logic
+- Reviewing JavaScript structure
+- Refining documentation
+- Exploring alternative implementation patterns
+
+No auto-generated full project code was directly deployed without manual understanding and modification.
+
+###Human Contributions
+Core concept design and behavioral philosophy
+- Extension architecture planning
+- DOM manipulation and scroll throttling logic
+- Implementation of progressive viscosity system
+- Educational domain detection logic
+- UX decisions and feature tuning
+- Integration and testing
+
+##License
+This project is licensed under the MIT License.
+MIT License allows:
+- Commercial use
+- Modification
+- Distribution
+- Private use
 
 
 
