@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Visco",
+  "description": "Adds physical friction and blur to social media to prevent doomscrolling.",
+  "version": "1.1",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "action": {
+    "default_title": "Visco Settings",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.instagram.com/*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "style.css"
+      ],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.instagram.com/*"
+      ]
+    }
+  ]
+}

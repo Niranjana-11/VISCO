@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Visco Settings</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #ff4757;
+    --accent-dim: rgba(255, 71, 87, 0.15);
+    --text: #f0f0f0;
+    --text-muted: #666;
+    --green: #2ed573;
+    --yellow: #ffa502;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  body {
+    width: 340px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--mono);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo span {
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 1px;
+  }
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* ── Banners ── */
+  .banner {
+    display: none;
+    margin: 12px 20px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .banner.visible { display: block; }
+  .banner.warn {
+    background: rgba(255,165,2,0.08);
+    border: 1px solid rgba(255,165,2,0.3);
+    color: var(--yellow);
+  }
+  .banner.locked {
+    background: rgba(46,213,115,0.06);
+    border: 1px solid rgba(46,213,115,0.2);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .banner.locked .banner-text strong {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+  .btn-unlock {
+    padding: 7px 12px;
+    background: transparent;
+    border: 1px solid rgba(46,213,115,0.3);
+    border-radius: 6px;
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .btn-unlock:hover { background: rgba(46,213,115,0.1); }
+
+  /* ── Body ── */
+  .body { padding: 16px 20px; }
+  .section-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 28px;
+    position: relative;
+  }
+  .tl-segment { height: 6px; border-radius: 3px; transition: width 0.3s ease; position: relative; }
+  .tl-seg-safe  { background: #2a2a2a; flex: 1; border-radius: 3px 0 0 3px; }
+  .tl-seg-popup { background: #ffa502; }
+  .tl-seg-blur  { background: linear-gradient(90deg, #ffa502, #ff4757); }
+  .tl-seg-lock  { background: var(--accent); border-radius: 0 3px 3px 0; width: 18px; }
+  .tl-label {
+    position: absolute;
+    bottom: -16px;
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--text-muted);
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  /* ── Sliders ── */
+  .slider-group { margin-bottom: 18px; }
+  .slider-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .slider-name { font-weight: 500; color: var(--text); font-size: 12.5px; }
+  .slider-value { font-family: var(--mono); font-size: 11px; color: var(--accent); min-width: 46px; text-align: right; }
+  .slider-sub { font-size: 10.5px; color: var(--text-muted); margin-bottom: 7px; }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%; height: 4px;
+    background: var(--border);
+    border-radius: 2px; outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px rgba(255,71,87,0.5);
+    transition: box-shadow 0.2s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 12px rgba(255,71,87,0.8); }
+
+  /* Locked slider overlay */
+  .slider-locked { position: relative; }
+  .slider-locked::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    cursor: not-allowed;
+  }
+  .slider-locked input[type=range] { opacity: 0.35; pointer-events: none; }
+  .slider-locked .slider-name, .slider-locked .slider-value { opacity: 0.5; }
+
+  /* ── Duration grid ── */
+  .duration-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 6px; }
+  .dur-btn {
+    padding: 7px 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.18s;
+  }
+  .dur-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .dur-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+  .dur-btn:disabled { opacity: 0.35; pointer-events: none; }
+
+  /* ── PIN setup section ── */
+  #pinSection { margin-top: 2px; }
+  .pin-inputs { display: flex; gap: 8px; }
+  .pin-inputs input {
+    flex: 1;
+    padding: 9px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    outline: none;
+    letter-spacing: 4px;
+    transition: border-color 0.2s;
+  }
+  .pin-inputs input:focus { border-color: var(--accent); }
+  #pinSetError { font-family: var(--mono); font-size: 10px; color: var(--accent); min-height: 16px; margin-top: 6px; }
+
+  /* ── Footer ── */
+  .footer { padding: 0 20px 18px; display: flex; gap: 8px; }
+  .btn-save {
+    flex: 1; padding: 11px;
+    background: var(--accent); border: none; border-radius: 8px;
+    color: #fff; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+  }
+  .btn-save:hover { opacity: 0.85; }
+  .btn-save:active { transform: scale(0.98); }
+  .btn-secondary {
+    padding: 11px 14px;
+    background: transparent; border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-muted); font-family: var(--mono); font-size: 10px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text); }
+  .btn-secondary:disabled { opacity: 0.3; pointer-events: none; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed; bottom: 12px; left: 50%;
+    transform: translateX(-50%) translateY(40px);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+    padding: 7px 16px; border-radius: 20px;
+    opacity: 0; transition: all 0.3s ease;
+    pointer-events: none; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.success { background: var(--green); color: #000; }
+  .toast.error   { background: var(--accent); color: #fff; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 4px 0 16px; }
+
+  /* ── PIN Entry Overlay ── */
+  #pinOverlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(10,10,10,0.97);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 24px;
+    backdrop-filter: blur(6px);
+  }
+  #pinOverlay.visible { display: flex; }
+
+  .pin-icon { font-size: 32px; margin-bottom: 12px; }
+  .pin-title { font-family: var(--mono); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .pin-sub { font-size: 11px; color: var(--text-muted); text-align: center; margin-bottom: 22px; line-height: 1.5; }
+
+  .pin-dots { display: flex; gap: 12px; margin-bottom: 20px; }
+  .pin-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: transparent;
+    transition: all 0.15s;
+  }
+  .pin-dot.filled { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px rgba(255,71,87,0.6); }
+
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 20%{transform:translateX(-5px)}
+    40%{transform:translateX(5px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)}
+  }
+  .shake { animation: shake 0.4s ease; }
+
+  .numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 220px;
+    margin-bottom: 16px;
+  }
+  .num-btn {
+    padding: 14px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .num-btn:hover { background: #222; border-color: #444; }
+  .num-btn:active { transform: scale(0.94); background: var(--accent-dim); border-color: var(--accent); }
+  .num-btn.del { font-size: 12px; color: var(--text-muted); }
+  .num-btn.empty { visibility: hidden; }
+
+  .pin-error { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 1px; min-height: 16px; margin-bottom: 10px; }
+
+  .btn-pin-cancel {
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text-muted);
+    font-family: var(--mono); font-size: 10px;
+    padding: 8px 20px; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-pin-cancel:hover { border-color: var(--text-muted); color: var(--text); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">VISCO <span>SPEED BUMP v1.1</span></div>
+  <div class="status-badge">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusText" style="color:var(--green)">ACTIVE</span>
+  </div>
+</div>
+
+<!-- No-PIN warning (visible until PIN is set) -->
+<div class="banner warn" id="noPinBanner">
+  ⚠ No PIN set. Add a PIN below to lock your settings against changes.
+</div>
+
+<!-- Locked banner (visible once PIN is set) -->
+<div class="banner locked" id="lockedBanner">
+  <div class="banner-text">
+    <strong>🔒 Settings Locked</strong>
+    PIN required to disable or reset Visco
+  </div>
+  <button class="btn-unlock" id="btnDisable">DISABLE</button>
+</div>
+
+<!-- Body -->
+<div class="body" id="mainBody">
+
+  <p class="section-title">Session Timeline</p>
+  <div class="timeline">
+    <div class="tl-segment tl-seg-safe" id="tlSafe"></div>
+    <div class="tl-segment tl-seg-popup" id="tlPopup" style="width:20px"></div>
+    <div class="tl-segment tl-seg-blur" id="tlBlur" style="width:40px"></div>
+    <div class="tl-segment tl-seg-lock"></div>
+    <span class="tl-label" style="left:0;transform:none;font-size:8px">0s</span>
+    <span class="tl-label" id="tlL1">30s</span>
+    <span class="tl-label" id="tlL2">40s</span>
+    <span class="tl-label" id="tlL3">85s</span>
+  </div>
+
+  <hr class="divider" style="margin-top:28px"/>
+
+  <div class="slider-group" id="sg1">
+    <div class="slider-row">
+      <span class="slider-name">⚠️ Popup Warning</span>
+      <span class="slider-value" id="popupVal">30s</span>
+    </div>
+    <div class="slider-sub">Show mindfulness check after this many seconds</div>
+    <input type="range" id="popupStart" min="10" max="120" step="5" value="30" />
+  </div>
+
+  <div class="slider-group" id="sg2">
+    <div class="slider-row">
+      <span class="slider-name">🌫️ Blur & Friction</span>
+      <span class="slider-value" id="blurVal">40s</span>
+    </div>
+    <div class="slider-sub">Begin blurring & scroll resistance</div>
+    <input type="range" id="blurStart" min="15" max="150" step="5" value="40" />
+  </div>
+
+  <div class="slider-group" id="sg3">
+    <div class="slider-row">
+      <span class="slider-name">🔒 Hard Lockout</span>
+      <span class="slider-value" id="lockVal">85s</span>
+    </div>
+    <div class="slider-sub">Full lockout triggers at this second mark</div>
+    <input type="range" id="lockoutStart" min="30" max="300" step="5" value="85" />
+  </div>
+
+  <hr class="divider"/>
+
+  <p class="section-title">Lockout Duration</p>
+  <div class="duration-grid">
+    <button class="dur-btn" data-mins="15">15m</button>
+    <button class="dur-btn" data-mins="30">30m</button>
+    <button class="dur-btn active" data-mins="60">1h</button>
+    <button class="dur-btn" data-mins="120">2h</button>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- PIN Setup -->
+  <div id="pinSection">
+    <p class="section-title" id="pinSectionLabel">Security PIN</p>
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;line-height:1.5" id="pinSectionDesc">
+      Create a 4-digit PIN to lock these settings. Required to disable or reset Visco.
+    </div>
+    <div class="pin-inputs">
+      <input type="password" id="pinInput" maxlength="4" placeholder="New PIN" inputmode="numeric" pattern="[0-9]*" />
+      <input type="password" id="pinConfirm" maxlength="4" placeholder="Confirm" inputmode="numeric" pattern="[0-9]*" />
+    </div>
+    <div id="pinSetError"></div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <button class="btn-secondary" id="btnReset">RESET</button>
+  <button class="btn-save" id="btnSave">SAVE SETTINGS</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- PIN Entry Overlay -->
+<div id="pinOverlay">
+  <div class="pin-icon" id="pinOverlayIcon">🔐</div>
+  <div class="pin-title" id="pinOverlayTitle">Enter PIN</div>
+  <div class="pin-sub" id="pinOverlaySub">Enter your 4-digit PIN to continue</div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="d0"></div>
+    <div class="pin-dot" id="d1"></div>
+    <div class="pin-dot" id="d2"></div>
+    <div class="pin-dot" id="d3"></div>
+  </div>
+  <div class="pin-error" id="pinError"></div>
+  <div class="numpad">
+    <button class="num-btn" data-n="1">1</button>
+    <button class="num-btn" data-n="2">2</button>
+    <button class="num-btn" data-n="3">3</button>
+    <button class="num-btn" data-n="4">4</button>
+    <button class="num-btn" data-n="5">5</button>
+    <button class="num-btn" data-n="6">6</button>
+    <button class="num-btn" data-n="7">7</button>
+    <button class="num-btn" data-n="8">8</button>
+    <button class="num-btn" data-n="9">9</button>
+    <button class="num-btn empty"></button>
+    <button class="num-btn" data-n="0">0</button>
+    <button class="num-btn del" id="numDel">⌫</button>
+  </div>
+  <button class="btn-pin-cancel" id="btnPinCancel">CANCEL</button>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
