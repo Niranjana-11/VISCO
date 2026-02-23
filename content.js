@@ -1,9 +1,4 @@
-/**
- * VISCO: THE SPEED BUMP
- * Final Consolidated MVP Script — Settings-aware version
- */
 
-// --- 1. CONFIGURATION & STATE ---
 let secondsActive = 0;
 let frictionEnabled = false;
 let lockoutActive = false;
